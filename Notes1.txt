@@ -1,0 +1,159 @@
+JavaScript 
+# Functions: Normal vs Arrow
+
+1. Context of this
+Normal Function:
+this refers to the object from which it is called.
+Example:
+JavaScript
+
+let user = {
+  name: 'Rahul',
+  greet: function() {
+    console.log('Hello, ' + this.name);
+  }
+};
+user.greet(); // Output: Hello, Rahul
+
+Arrow Function:
+Does not have its own this. Inherits from the parent scope.
+Example:
+JavaScript
+
+let user = {
+  name: 'Rahul',
+  greet: () => {
+    console.log('Hello, ' + this.name);
+  }
+};
+user.greet(); // Output may vary depending on the outer scope's `this`
+
+
+2. Handling of arguments Object
+Normal Function:
+Has an arguments object which contains all the arguments passed to the function.
+Example:
+JavaScript
+
+function showArguments() {
+  console.log(arguments);
+}
+showArguments(1, 2, 3, 4); // Output: [Arguments] { '0': 1, '1': 2, '2': 3, '3': 4 }
+
+Arrow Function:
+Does not have an arguments object. Use rest parameters instead.
+Example:
+JavaScript
+
+let showArguments = (...args) => {
+  console.log(args);
+}
+showArguments(1, 2, 3, 4); // Output: [1, 2, 3, 4]
+
+
+3. Use as Constructors
+Normal Function:
+Can be used as constructors with the new keyword.
+Example:
+JavaScript
+
+function Person(name) {
+  this.name = name;
+}
+let person1 = new Person('Rahul');
+console.log(person1.name); // Output: Rahul
+
+Arrow Function:
+Cannot be used as constructors. They will throw an error if attempted.
+Example:
+JavaScript
+
+let Person = (name) => {
+  this.name = name;
+}
+// This will throw an error
+let person1 = new Person('Rahul');
+
+
+4. Object Methods
+Normal Function:
+Suitable for object methods when using this.
+Example:
+JavaScript
+
+let user = {
+  name: 'Rahul',
+  greet: function() {
+    console.log('Hello, ' + this.name);
+  }
+};
+user.greet(); // Output: Hello, Rahul
+
+Arrow Function:
+Not suitable for object methods when using this as it does not bind its own this.
+Example:
+JavaScript
+
+let user = {
+  name: 'Rahul',
+  greet: () => {
+    console.log('Hello, ' + this.name);
+  }
+};
+user.greet(); // Output may not be as expected
+
+
+#React Components:
+
+Components are like templates that you can reuse multiple times.
+There are two types of components: Functional and Class.
+
+1. Functional Components:
+
+They are simple JavaScript functions that return JSX.
+Example:
+function Greeting(props) {
+  return <h1>Hello, {props.name}!</h1>;
+}
+
+You can manage state and lifecycle features using hooks.
+
+2. Class Components:
+
+They are ES6 classes that extend from React.Component.
+Example:
+class Greeting extends React.Component {
+  render() {
+    return <h1>Hello, {this.props.name}!</h1>;
+  }
+}
+
+They include lifecycle methods and state management.
+
+3. Props (Properties):
+
+A way to pass information to customize components.
+Example:
+<Greeting name="World" />
+
+Here, name is a prop that tells the Greeting component what to display.
+
+
+# DOM (Document Object Model):
+
+1. A programming API that represents web documents as a ‘DOM tree’.			
+Each HTML element becomes a ‘node’ in this tree.
+Nodes can be read, added, modified, or removed using JavaScript.
+Enables the creation of dynamic content, allowing content to change without reloading the page.
+DOM Updates:
+
+Updating the DOM can be a heavy operation because:
+The browser has to recalculate layouts.
+Recalculations and re-rendering can slow down performance.
+
+#Virtual DOM:
+
+Changes are applied to a virtual copy of the DOM instead of the actual DOM.
+The ‘diffing’ process identifies differences between the actual DOM and Virtual DOM.
+Only necessary changes are applied to the actual DOM.
+Reduces unnecessary updates and improves application speed.
